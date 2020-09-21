@@ -1,0 +1,18 @@
+Package: competitivenessData
+Type: Package
+Title: Containes data on competitiveness issues in the EU
+Version: 0.1.0
+Authors@R: person("Claudius", "Graebner", 
+  email = "claudius@claudius-graebner.com",
+  role = c("aut", "cre"))
+Description: The package hosts a number of quantitative indicators used to
+    determine competitiveness in the EU. Indicators mostly refer to countries,
+    but also to regions. The package contains the data and the code to 
+    automatically retrieve the newest version of this data.
+License: What license is it under?
+Depends: R (>= 4.0.2)
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+Imports: 
+    data.table (>= 1.13.0)
