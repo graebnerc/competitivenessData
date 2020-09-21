@@ -48,10 +48,10 @@ setup_mis <- function(download_data){
 
       names_labels <- c(
         "iso3c"="geo",
-        "time"="time",
+        "year"="time",
         "loans"="Gross non-performing loans, domestic and foreign entities - % of gross loans",
         "banking_leverage"="Consolidated banking leverage, domestic and foreign entities (asset-to-equity multiple)",
-        "banking_leverage"="Current account balance - % of GDP, 3 years average",
+        "current_account_avg3y"="Current account balance - % of GDP, 3 years average",
         "direct_investment_stocks"="Direct investment in the reporting economy (stocks) - % of GDP",
         "current_account"="Current account balance - % of GDP",
         "export_oecd_5ychange"="Share of OECD export - 5 years % change",
@@ -121,13 +121,11 @@ setup_mis <- function(download_data){
       stop("MIS data not unique. Please check manually!")
     }
   } else{
-    if (here::here("data-raw/mis-indicators.rds")){
-      mis_dat <- readRDS(here::here("data-raw/mis-indicators.rds"))
+    if (file.exists(here::here("data-raw/mis-indicators.rds"))){
+      mis_dat_wide <- readRDS(here::here("data-raw/mis-indicators.rds"))
     } else{
       stop("Data does not exist locally. Download with `download_data=TRUE`.")
     }
   }
-  return(mis_dat)
+  return(mis_dat_wide)
 }
-
-setup_mis(download_data = TRUE)

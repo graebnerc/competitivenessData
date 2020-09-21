@@ -20,4 +20,6 @@ Imports:
     dplyr (>= 1.0.2),
     tidyr (>= 1.1.2),
     here (>= 0.1),
-    Hmisc (>= 4.4.1)
+    Hmisc (>= 4.4.1),
+    countrycode (>= 1.2.0),
+    purrr (>= 0.3.4)
