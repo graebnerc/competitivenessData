@@ -1,7 +1,7 @@
 source(here::here("data-raw/mis-indicators.R"))
 source(here::here("data-raw/pcc-indicators.R"))
 
-download_data_www <- TRUE
+download_data_www <- FALSE
 
 pcc_data <- setup_pcc(download_data = download_data_www)
 pcc_data <- dplyr::mutate(pcc_data, year=as.double(year))
@@ -16,7 +16,11 @@ full_annual_data <- dplyr::full_join(
 full_annual_data <- dplyr::select(full_annual_data,
                                   iso3c, year, dplyr::everything())
 
-data.table::fwrite(
-  full_annual_data, here::here("data/competitiveness_data_annual.csv"))
+file_path <-  here::here("data/competitiveness_data_annual.")
 
-saveRDS(full_annual_data, here::here("data/competitiveness_data_annual.rds"))
+data.table::fwrite(
+  full_annual_data, paste0(file_path, ".csv"))
+
+saveRDS(full_annual_data, paste0(file_path, ".rds"))
+
+writexl::write_xlsx(full_annual_data, paste0(file_path, ".xlsx"))

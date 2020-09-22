@@ -123,6 +123,7 @@ setup_pcc <- function(download_data){
         custom_dict = country_names)
     )
     data_frames[[as.character(f)]] <- current_data
+    unlink(current_file)
   }
 
   full_data <- purrr::reduce(
