@@ -16,7 +16,8 @@ Data can be found in the folder `data/competitiveness_data_annual`.
 * The indicators for the [Macroeconomic Imbalance Scoreboard](https://ec.europa.eu/info/business-economy-euro/economic-and-fiscal-policy-coordination/eu-economic-governance-monitoring-prevention-correction/macroeconomic-imbalance-procedure_de)
 * The indicators for the [Price and competitiveness report](https://ec.europa.eu/info/business-economy-euro/indicators-statistics/economic-databases/price-and-cost-competitiveness_en),
 but so far only the annual data has been considered; weight matrices, monthly 
-and quaterly data have not been considered so far
+and quarterly data have not been considered so far
+* Three indicators providing information about the status of a country in the MIP and the SGP surveillance (constructed by the authors)
 
 ### Data on the regional level
 
