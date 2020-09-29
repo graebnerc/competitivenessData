@@ -30,7 +30,7 @@ There are four editions:
 * [The 2010 edition](https://ec.europa.eu/regional_policy/en/information/publications/working-papers/2011/a-new-regional-competitiveness-index-theory-methods-and-findings)
 * [The 2013 edition](https://ec.europa.eu/regional_policy/en/information/publications/studies/2013/eu-regional-competitiveness-index-rci-2013)
 * [The 2016 edition](https://ec.europa.eu/regional_policy/en/information/maps/regional_competitiveness/2016/)
-* [The 2019 edition]()
+* [The 2019 edition](https://ec.europa.eu/regional_policy/en/information/maps/regional_competitiveness/)
 
 Currently, only the aggregated data is contained here, but it might be helpful
 to have a look at the methodological annex of the editions, particularly the
