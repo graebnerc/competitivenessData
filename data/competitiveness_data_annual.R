@@ -3,6 +3,7 @@ source(here::here("data-raw/pcc-indicators.R"))
 source(here::here("data-raw/sgp-mis-own-indicators.R"))
 source(here::here("R/get_solt_functions.R"))
 source(here::here("R/helper_functions.R"))
+
 country_sample <- c(
   "BEL", "DEU", "EST", "IRL", "GRC", "ESP", "FRA", "ITA", "CYP", "LVA", "LTU",
   "LUX", "MLT", "NLD", "AUT", "PRT", "SVN", "SVK", "FIN", "BGR", "CZE", "DNK",
@@ -14,6 +15,22 @@ year_start <- 1994
 year_end <- 2020
 
 download_data_www <- TRUE
+
+country_classification_jee <- list()
+country_classification_jee[["Core"]] <- countrycode::countrycode(
+  c("Austria", "Belgium", "Denmark", "Finland", "Germany", "Sweden"),
+  "country.name", "iso3c")
+country_classification_jee[["Catchup"]] <- countrycode::countrycode(
+  c("Bulgaria", "Romania", "Czech Republic", "Estonia", "Latvia",
+    "Lithuania", "Hungary", "Poland", "Slovenia", "Slovakia", "Croatia"),
+  "country.name", "iso3c")
+country_classification_jee[["Finance"]] <- countrycode::countrycode(
+  c("Luxembourg", "Netherlands", "Malta", "Ireland"),
+  "country.name", "iso3c")
+country_classification_jee[["Periphery"]] <- countrycode::countrycode(
+  c("Cyprus", "France", "Greece",
+    "Italy", "Portugal", "Spain"),
+  "country.name", "iso3c")
 
 pcc_data <- setup_pcc(download_data = download_data_www)
 pcc_data <- dplyr::mutate(pcc_data, year=as.double(year))
@@ -51,6 +68,12 @@ full_annual_data <- dplyr::full_join(
 full_annual_data <- dplyr::select(full_annual_data,
                                   iso3c, year, dplyr::everything())
 data.table::setDT(full_annual_data)
+full_annual_data[, country_group_jee := ifelse(
+  iso3c %in% country_classification_jee[["Core"]], "Core", ifelse(
+    iso3c %in% country_classification_jee[["Periphery"]], "Periphery", ifelse(
+      iso3c %in% country_classification_jee[["Catchup"]], "Catchup", ifelse(
+        iso3c %in% country_classification_jee[["Finance"]], "Finance", NA
+    ))))]
 
 file_path <-  here::here("data/competitiveness_data_annual")
 
