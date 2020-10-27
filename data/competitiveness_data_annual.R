@@ -1,8 +1,19 @@
 source(here::here("data-raw/mis-indicators.R"))
 source(here::here("data-raw/pcc-indicators.R"))
 source(here::here("data-raw/sgp-mis-own-indicators.R"))
+source(here::here("R/get_oecd_functions.R"))
 
-download_data_www <- FALSE
+country_sample <- c(
+  "BEL", "DEU", "EST", "IRL", "GRC", "ESP", "FRA", "ITA", "CYP", "LVA", "LTU",
+  "LUX", "MLT", "NLD", "AUT", "PRT", "SVN", "SVK", "FIN", "BGR", "CZE", "DNK",
+  "HRV", "HUN", "POL", "ROU", "SWE", "GBR", "NOR", "CHE", "TUR", "RUS", "USA",
+  "CAN", "MEX", "BRA", "AUS", "NZL", "JPN", "CHN", "HKG", "KOR"
+)
+
+year_start <- 1994
+year_end <- 2020
+
+download_data_www <- TRUE
 
 pcc_data <- setup_pcc(download_data = download_data_www)
 pcc_data <- dplyr::mutate(pcc_data, year=as.double(year))

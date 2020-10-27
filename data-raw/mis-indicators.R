@@ -46,8 +46,12 @@ setup_mis <- function(download_data){
                                          values_from = "values")
       data.table::setDT(mis_dat_wide)
 
+      mis_dat_wide[, iso3c:=countrycode::countrycode(
+        geo, "country.name", "iso3c")]
+      mis_dat_wide[, geo:=NULL]
+      #browser()
       names_labels <- c(
-        "iso3c"="geo",
+        "iso3c"="iso3c",
         "year"="time",
         "loans"="Gross non-performing loans, domestic and foreign entities - % of gross loans",
         "banking_leverage"="Consolidated banking leverage, domestic and foreign entities (asset-to-equity multiple)",
@@ -60,7 +64,7 @@ setup_mis <- function(download_data){
         "trade_balance_energy"="Net trade balance of energy products - % of GDP",
         "REER_42tp_change1y"="Real effective exchange rate, 42 trading partners - 1 year % change",
         "REER_42tp_change3y"="Real effective exchange rate, 42 trading partners - 3 years % change",
-        "REER_euro_change3y"="Real effective exchange rate, Euro area trading partners - 3 years % change",
+        "REER_euro_change3y"="Real effective exchange rate, euro area trading partners - 3 years % change",
         "export_shares_change5y"="Export market shares - 5 years % change",
         "export_shares_change1y"="Export market shares - 1 year % change",
         "export_shares_vol_change1y"="Export market share, volumes - 1 year % change",
@@ -81,7 +85,7 @@ setup_mis <- function(download_data){
         "low_work_perc_ch3y"="People living in households with very low work intensity - % of population aged 0-59, % point change (t, t-3)",
         "ulc_ch3y"="Nominal unit labour cost index - 3 years % change",
         "ulc_ch1y"="Nominal unit labour cost index - 1 year % change",
-        "ulc_perf_eu_ch10y"="Unit labour cost performance relative to Euro area - 10 years % change",
+        "ulc_perf_eu_ch10y"="Unit labour cost performance relative to euro area - 10 years % change",
         "activity_rate_perc"="Activity rate (15-64 years) - % of the total population of the same age group",
         "activity_rate_perc_ch3y"="Activity rate (15-64 years) - % point change (t, t-3)",
         "unemp_long_perc"="Long-term unemployment rate - % of active population in the same age group",
@@ -111,7 +115,7 @@ setup_mis <- function(download_data){
 
       data.table::setnames(mis_dat_wide,
                            old = unname(names_labels),
-                           new = names(names_labels))
+                           new = names(names_labels), skip_absent = F)
 
       Hmisc::label(mis_dat_wide) = as.list(
         names_labels[match(names(mis_dat_wide), names(names_labels))])
