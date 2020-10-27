@@ -29,8 +29,12 @@ own_data <- dplyr::mutate(own_data, Country=as.character(Country))
 
 gini_data <- setup_swiid(
   download_data = download_data_www, file_name = "swiid9_0.rda",
-  countries_considered = country_sample, first_year = year_start,
-  last_year = year_end)
+  countries_considered = country_sample,
+  first_year = year_start, last_year = year_end)
+
+wb_data <- get_worldbank(
+  download_data = download_data_www, countries_considered = country_sample,
+  first_year = year_start, last_year = year_end)
 
 full_annual_data <- dplyr::full_join(
   pcc_data, mis_data, by=c("iso3c", "year"))
@@ -41,10 +45,16 @@ full_annual_data <- dplyr::full_join(
 full_annual_data <- dplyr::full_join(
   full_annual_data, own_data, by=c("iso3c"="Country", "year"))
 
+full_annual_data <- dplyr::full_join(
+  full_annual_data, wb_data, by=c("iso3c", "year"))
+
 full_annual_data <- dplyr::select(full_annual_data,
                                   iso3c, year, dplyr::everything())
+data.table::setDT(full_annual_data)
 
 file_path <-  here::here("data/competitiveness_data_annual")
+
+test_uniqueness(full_annual_data, index_vars = c("year", "iso3c"))
 
 data.table::fwrite(
   full_annual_data, paste0(file_path, ".csv"))
