@@ -24,3 +24,21 @@ test_uniqueness <- function(data_table, index_vars, print_pos=TRUE){
     return(TRUE)
   }
 }
+
+#' Loads an object from an rda file
+#'
+#' @param file Path to the `.rda` file
+#' @param object_name The name of the object to be returned; can be NULL
+#' @return If `object_name` is not NULL the object; if yes, a list of all
+#'  objects in the `file`
+load_rda <- function(file, object_name=NULL) {
+  tmp <- new.env()
+  load(file = file, envir = tmp)
+  if (is.null(object_name)){
+    return_object <- ls(tmp)
+  } else {
+    return_object <- tmp[[object_name]]
+  }
+  return(return_object)
+}
+

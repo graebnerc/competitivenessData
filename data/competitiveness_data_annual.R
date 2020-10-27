@@ -1,8 +1,8 @@
 source(here::here("data-raw/mis-indicators.R"))
 source(here::here("data-raw/pcc-indicators.R"))
 source(here::here("data-raw/sgp-mis-own-indicators.R"))
-source(here::here("R/get_oecd_functions.R"))
-
+source(here::here("R/get_solt_functions.R"))
+source(here::here("R/helper_functions.R"))
 country_sample <- c(
   "BEL", "DEU", "EST", "IRL", "GRC", "ESP", "FRA", "ITA", "CYP", "LVA", "LTU",
   "LUX", "MLT", "NLD", "AUT", "PRT", "SVN", "SVK", "FIN", "BGR", "CZE", "DNK",
@@ -27,8 +27,16 @@ own_data <- setup_own_indicators()
 own_data <- dplyr::mutate(own_data, year=as.double(year))
 own_data <- dplyr::mutate(own_data, Country=as.character(Country))
 
+gini_data <- setup_swiid(
+  download_data = download_data_www, file_name = "swiid9_0.rda",
+  countries_considered = country_sample, first_year = year_start,
+  last_year = year_end)
+
 full_annual_data <- dplyr::full_join(
   pcc_data, mis_data, by=c("iso3c", "year"))
+
+full_annual_data <- dplyr::full_join(
+  full_annual_data, gini_data, by=c("iso3c", "year"))
 
 full_annual_data <- dplyr::full_join(
   full_annual_data, own_data, by=c("iso3c"="Country", "year"))
