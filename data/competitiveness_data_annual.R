@@ -1,7 +1,9 @@
 source(here::here("data-raw/mis-indicators.R"))
 source(here::here("data-raw/pcc-indicators.R"))
+source(here::here("R/get_worldbank_functions.R"))
 source(here::here("data-raw/sgp-mis-own-indicators.R"))
 source(here::here("R/get_solt_functions.R"))
+source(here::here("data-raw/CSR_database.R"))
 source(here::here("R/helper_functions.R"))
 
 country_sample <- c(
@@ -14,7 +16,7 @@ country_sample <- c(
 year_start <- 1994
 year_end <- 2020
 
-download_data_www <- TRUE
+download_data_www <- FALSE
 
 country_classification_jee <- list()
 country_classification_jee[["Core"]] <- countrycode::countrycode(
@@ -53,6 +55,10 @@ wb_data <- get_worldbank(
   download_data = download_data_www, countries_considered = country_sample,
   first_year = year_start, last_year = year_end)
 
+csr_data <- setup_imp_scores()
+csr_data <- dplyr::mutate(csr_data, year=as.double(year))
+csr_data <- dplyr::mutate(csr_data, iso3c=as.character(iso3c))
+
 full_annual_data <- dplyr::full_join(
   pcc_data, mis_data, by=c("iso3c", "year"))
 
@@ -64,6 +70,9 @@ full_annual_data <- dplyr::full_join(
 
 full_annual_data <- dplyr::full_join(
   full_annual_data, wb_data, by=c("iso3c", "year"))
+
+full_annual_data <- dplyr::full_join(
+  full_annual_data, csr_data, by=c("iso3c", "year"))
 
 full_annual_data <- dplyr::select(full_annual_data,
                                   iso3c, year, dplyr::everything())
