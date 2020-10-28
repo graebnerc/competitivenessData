@@ -1,5 +1,29 @@
 # EU competitiveness data
 
+The package provides data on competition and competitiveness on the EU level.
+The data can either be downloaded directly from the directory `data`, or,
+preferable if you use `R`, be accessed by installing the package:
+
+```
+devtools::install_github("graebnerc/competitivenessData")
+```
+
+The you can access the data either via:
+
+````
+competitivenessData::competitiveness_data_macro
+competitivenessData::rci_data_annual
+```
+
+Or you can load it via:
+
+```
+data("competitiveness_data_macro", package = "competitivenessData")
+data("competitiveness_data_macro", package = "competitivenessData")
+```
+
+Make sure to update the package to get the most recent version.
+
 ## Variable description
 
 For the moment, at least the `*.rds` files include the labels of the variables,
