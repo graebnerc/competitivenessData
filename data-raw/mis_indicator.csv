@@ -1,4 +1,4 @@
-Country;MIP_2012;MIP_2013;MIP_2014;MIP_2015;MIP_2016;MIP_2017;MIP_2018;MIP_2019;MIP_2020
+Country;2012;2013;2014;2015;2016;2017;2018;2019;2020
 BE;IDR with imbalances;IDR with imbalances;IDR with imbalances;IDR with imbalances;IDR with no imbalances;no IDR;no IDR;no IDR;no IDR
 BG;IDR with imbalances;IDR with imbalances;IDR with imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with imbalances;IDR with imbalances;IDR
 CZ;no IDR;no IDR;no IDR;no IDR;no IDR;no IDR;no IDR;no IDR;no IDR
@@ -9,7 +9,7 @@ IE;Non eligible for AMR assessment;Non eligible for AMR assessment;IDR with imba
 EL;Non eligible for AMR assessment;Non eligible for AMR assessment;Non eligible for AMR assessment;Non eligible for AMR assessment;Non eligible for AMR assessment;Non eligible for AMR assessment;Non eligible for AMR assessment;IDR with excessive imbalances;IDR
 ES;IDR with imbalances;IDR with excessive imbalances;IDR with imbalances and specific monitoring;IDR with imbalances and specific monitoring;IDR with imbalances;IDR with imbalances;IDR with imbalances;IDR with imbalances;IDR
 FR;IDR with imbalances;IDR with imbalances;IDR with imbalances and specific monitoring;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with imbalances;IDR with imbalances;IDR
-HR;-;-;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with imbalances;IDR
+HR;NA;NA;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with imbalances;IDR
 IT;IDR with imbalances;IDR with imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR
 CY;IDR with imbalances;Non eligible for AMR assessment;Non eligible for AMR assessment;Non eligible for AMR assessment;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR with excessive imbalances;IDR
 LV;no IDR;no IDR;no IDR;no IDR;no IDR;no IDR;no IDR;no IDR;no IDR

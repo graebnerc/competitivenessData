@@ -7,7 +7,7 @@ setup_own_indicators <- function(){
   # The MIS indicator
   mis_indicator <- data.table::fread(
     here::here("data-raw/mis_indicator.csv"),
-    colClasses = c("character"))
+    colClasses = c("character"), sep = ";")
 
   mis_indicator <- dplyr::select(
     mis_indicator, c("Country", dplyr::starts_with("MIP")))
@@ -31,7 +31,7 @@ setup_own_indicators <- function(){
 
   sgp_compliance_indicator <- data.table::fread(
     here::here("data-raw/sgp_compliance_indicator.csv"),
-    header = TRUE, colClasses = "character")
+    header = TRUE, colClasses = "character", sep = ";")
 
   sgp_compliance_indicator <- dplyr::select(
     sgp_compliance_indicator, c("Country", dplyr::starts_with("SGP")))
@@ -52,7 +52,7 @@ setup_own_indicators <- function(){
 
   sgp_edp_indicator <- data.table::fread(
     here::here("data-raw/sgp_edp_indicator.csv"),
-    header = TRUE, colClasses = "character")
+    header = TRUE, colClasses = "character", sep = ";")
 
   sgp_edp_indicator <- dplyr::select(
     sgp_edp_indicator, c("Country", dplyr::starts_with("SGP")))
