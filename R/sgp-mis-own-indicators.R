@@ -2,19 +2,24 @@ source(here::here("R/helper_functions.R"))
 
 #' Aggregates the own indicators on MIS and SGP
 #'
-#' ...
-setup_own_indicators <- function(){
+#' @param countries_considered iso3c codes for the countries to be left in data
+#' @param first_year first year considered
+#' @param last_year last year considered
+#' @return tibble with all indicators on sgp and mis manually assembled
+setup_own_indicators <- function(
+  countries_considered, first_year, last_year){
   # The MIS indicator
   mis_indicator <- data.table::fread(
     here::here("data-raw/mis_indicator.csv"),
-    colClasses = c("character"), sep = ";")
-
-  mis_indicator <- dplyr::select(
-    mis_indicator, c("Country", dplyr::starts_with("MIP")))
+    colClasses = c("character"), sep = ";", header = T)
+  # mis_indicator <- dplyr::select(
+  #   mis_indicator, c("Country", dplyr::starts_with("MIP")))
 
   # TODO What is "-" about? Missing value?
+  mis_indicator <- dplyr::select(
+    mis_indicator, dplyr::one_of("Country", as.character(first_year:last_year)))
 
-  mis_indicator <- tidyr::pivot_longer(
+    mis_indicator <- tidyr::pivot_longer(
     data = mis_indicator,
     cols=-dplyr::one_of("Country"),
     names_to="year",
@@ -34,7 +39,8 @@ setup_own_indicators <- function(){
     header = TRUE, colClasses = "character", sep = ";")
 
   sgp_compliance_indicator <- dplyr::select(
-    sgp_compliance_indicator, c("Country", dplyr::starts_with("SGP")))
+    sgp_compliance_indicator,
+    dplyr::one_of("Country", as.character(first_year:last_year)))
 
   sgp_compliance_indicator <- tidyr::pivot_longer(
     data = sgp_compliance_indicator,
@@ -55,7 +61,8 @@ setup_own_indicators <- function(){
     header = TRUE, colClasses = "character", sep = ";")
 
   sgp_edp_indicator <- dplyr::select(
-    sgp_edp_indicator, c("Country", dplyr::starts_with("SGP")))
+    sgp_edp_indicator,
+    dplyr::one_of("Country", as.character(first_year:last_year)))
 
   sgp_edp_indicator <- tidyr::pivot_longer(
     data = sgp_edp_indicator,
@@ -75,6 +82,8 @@ setup_own_indicators <- function(){
                                      by = c("year", "Country"))
   all_indicators <- dplyr::full_join(all_indicators, sgp_edp_indicator,
                                      by = c("year", "Country"))
+  all_indicators <- dplyr::filter(all_indicators,
+    year>=first_year, year<=last_year, Country %in% countries_considered)
 
   unique_data <- test_uniqueness(all_indicators, c("year", "Country"))
   if (unique_data){
@@ -89,8 +98,8 @@ setup_own_indicators <- function(){
     Hmisc::label(all_indicators) = as.list(
       var_labels[match(names(all_indicators), names(var_labels))])
     rel_path <- "data-raw/own-indicators_annual.rds"
-    saveRDS(all_indicators, file = here::here(rel_path))
-    print(paste0("Saved own indicators data to: ", rel_path))
+    # saveRDS(all_indicators, file = here::here(rel_path))
+    # print(paste0("Saved own indicators data to: ", rel_path))
   } else {
     stop("Own indicator data not unique. Please check manually!")
   }

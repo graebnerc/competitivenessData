@@ -14,7 +14,9 @@ build_annual_competitiveness <- function(
   mis_data <- dplyr::mutate(mis_data, year=as.double(year))
   mis_data <- dplyr::mutate(mis_data, iso3c=as.character(iso3c))
 
-  own_data <- setup_own_indicators()
+  own_data <- setup_own_indicators(
+    countries_considered = country_sample,
+    first_year = year_start, last_year = year_end)
   own_data <- dplyr::mutate(own_data, year=as.double(year))
   own_data <- dplyr::mutate(own_data, Country=as.character(Country))
 
