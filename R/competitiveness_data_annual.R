@@ -99,6 +99,7 @@ if (F){
   source(here::here("R/get_solt_functions.R"))
   source(here::here("R/CSR_database.R"))
   source(here::here("R/helper_functions.R"))
+  source(here::here("R/eurozone_eu_infos.R"))
 
   competitiveness_data_macro <- build_annual_competitiveness()
 
