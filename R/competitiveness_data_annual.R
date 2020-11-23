@@ -14,6 +14,9 @@ build_annual_competitiveness <- function(
   mis_data <- dplyr::mutate(mis_data, year=as.double(year))
   mis_data <- dplyr::mutate(mis_data, iso3c=as.character(iso3c))
 
+  desc_data <- get_euro_info()
+  desc_data <- dplyr::mutate(desc_data, iso3c=as.character(iso3c))
+
   own_data <- setup_own_indicators(
     countries_considered = country_sample,
     first_year = year_start, last_year = year_end)
@@ -35,6 +38,9 @@ build_annual_competitiveness <- function(
 
   full_annual_data <- dplyr::full_join(
     pcc_data, mis_data, by=c("iso3c", "year"))
+
+  full_annual_data <- dplyr::full_join(
+    pcc_data, desc_data, by=c("iso3c"))
 
   full_annual_data <- dplyr::full_join(
     full_annual_data, gini_data, by=c("iso3c", "year"))

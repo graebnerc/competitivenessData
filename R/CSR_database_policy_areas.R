@@ -55,8 +55,6 @@ create_CSR_sub_assessment <- function(convert_csv){
     orig_data[, n_csr_sub:=.N, .(country, year)]
     orig_data[, n_csr_sub_total:=.N, .(year)]
 
-    orig_data[, assessment_nb:=countrycode::countrycode(
-      assessment, "assessment", "code") , .(country, year)]
     # TODO: Hier noch die scores checken
     assessment_score_list <- list( # Das wie ich dachte
       "Not Assessed"=NA,
