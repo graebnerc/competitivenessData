@@ -4,3 +4,6 @@
 .RData
 .Ruserdata
 .DS_Store
+data-raw/CSRs_policy_area_conf.csv
+data-raw/CSRs_policy_area_conf.xlsx
+data/CSR_policy_areas.rds
