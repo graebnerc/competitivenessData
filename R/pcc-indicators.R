@@ -131,6 +131,10 @@ setup_pcc <- function(download_data){
     dplyr::full_join,
     by=c("year", "country")
   )
+  full_data <-  dplyr::filter(
+    full_data,
+    !country %in% c("Euro_Area", "European_Union")
+    )
   full_data <- dplyr::mutate(
     full_data, iso3c=countrycode::countrycode(
       country, "country.name", "iso3c"))

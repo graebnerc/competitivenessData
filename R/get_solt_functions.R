@@ -20,6 +20,8 @@ setup_swiid <- function(download_data, file_name, countries_considered,
   swiid_data <- paste0(here::here("data-raw", file_name))
   swiid_data <- load_rda(file = swiid_data, object_name = "swiid_summary")
   data.table::setDT(swiid_data)
+  swiid_data <- swiid_data[
+    !country %in% c("Czechoslovakia", "Kosovo", "Micronesia", "Yugoslavia")]
   swiid_data[, iso3c:=countrycode::countrycode(
     country, "country.name", "iso3c")]
   swiid_data[, year:=as.double(year)]

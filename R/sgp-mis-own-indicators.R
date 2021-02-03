@@ -17,9 +17,9 @@ setup_own_indicators <- function(
 
   # TODO What is "-" about? Missing value?
   mis_indicator <- dplyr::select(
-    mis_indicator, dplyr::one_of("Country", as.character(first_year:last_year)))
+    mis_indicator, "Country", dplyr::any_of(as.character(first_year:last_year)))
 
-    mis_indicator <- tidyr::pivot_longer(
+  mis_indicator <- tidyr::pivot_longer(
     data = mis_indicator,
     cols=-dplyr::one_of("Country"),
     names_to="year",
@@ -40,7 +40,7 @@ setup_own_indicators <- function(
 
   sgp_compliance_indicator <- dplyr::select(
     sgp_compliance_indicator,
-    dplyr::one_of("Country", as.character(first_year:last_year)))
+    "Country", dplyr::any_of(as.character(first_year:last_year)))
 
   sgp_compliance_indicator <- tidyr::pivot_longer(
     data = sgp_compliance_indicator,
@@ -62,7 +62,7 @@ setup_own_indicators <- function(
 
   sgp_edp_indicator <- dplyr::select(
     sgp_edp_indicator,
-    dplyr::one_of("Country", as.character(first_year:last_year)))
+    "Country", dplyr::any_of(as.character(first_year:last_year)))
 
   sgp_edp_indicator <- tidyr::pivot_longer(
     data = sgp_edp_indicator,
