@@ -1,10 +1,10 @@
-﻿Country;2009;2010;2011;2012;2013;2014;2015;2016;2017;2018;2019
+Country;2009;2010;2011;2012;2013;2014;2015;2016;2017;2018;2019
 BE;y1;y1;y1;y1;y1;y1;n;n;n;n;n
 BG;n;y1;y1;y1;n;n;n;n;n;n;n
 CZ;y1;y1;y1;y1;y1;y1;n;n;n;n;n
 DK;n;y1;y1;y1;y1;y1;n;n;n;n;n
 DE;y1;y1;y1;y1;n;n;n;n;n;n;n
-EE;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+EE;n;n;n;n;n;n;n;n;n;n;n
 IE;y1;y1;y1;y1;y1;y1;y1;y1;n;n;n
 EL;y1;y1;y1;y1;y1;y1;y1;y1;y1;n;n
 ES;y1;y1;y1;y1;y1;y1;y1;y1;y1;y1;y1
@@ -14,7 +14,7 @@ IT;y1;y1;y1;y1;y1;n;n;n;n;n;n
 CY;n;y1;y1;y1;y1;y1;y1;y1;n;n;n
 LV;y1;y1;y1;y1;y1;n;n;n;n;n;n
 LT;y1;y1;y1;y1;y1;n;n;n;n;n;n
-LU;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+LU;n;n;n;n;n;n;n;n;n;n;n
 HU;y1;y1;y1;y1;y1;n;n;n;n;n;n
 MT;y1;y1;y1;y1;y2;y2;y2;n;n;n;n
 NL;y1;y1;y1;y1;y1;y1;n;n;n;n;n
@@ -25,5 +25,5 @@ RO;y1;y1;y1;y1;y1;n;n;n;n;n;n
 SI;y1;y1;y1;y1;y1;y1;y1;y1;n;n;n
 SK;y1;y1;y1;y1;y1;y1;n;n;n;n;n
 FI;n;y1;y1;n;n;n;n;n;n;n;n
-SE;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+SE;n;n;n;n;n;n;n;n;n;n;n
 UK;y1;y1;y1;y1;y1;y1;y1;y1;y1;n;n
