@@ -40,7 +40,7 @@ build_annual_competitiveness <- function(
     pcc_data, mis_data, by=c("iso3c", "year"))
 
   full_annual_data <- dplyr::full_join(
-    pcc_data, desc_data, by=c("iso3c"))
+    full_annual_data, desc_data, by=c("iso3c"))
 
   full_annual_data <- dplyr::full_join(
     full_annual_data, gini_data, by=c("iso3c", "year"))
