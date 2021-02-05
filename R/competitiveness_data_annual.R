@@ -32,6 +32,13 @@ build_annual_competitiveness <- function(
     download_data = download_data_www, countries_considered = country_sample,
     first_year = year_start, last_year = year_end)
 
+  eurostat_sgp <- get_eurostat_sgp(
+    download_data = download_data_www, countries_considered = country_sample,
+    first_year = year_start, last_year = year_end
+  )
+  eurostat_sgp <- dplyr::mutate(eurostat_sgp, year=as.double(year))
+  eurostat_sgp <- dplyr::mutate(eurostat_sgp, iso3c=as.character(iso3c))
+
   csr_data <- setup_imp_scores()
   csr_data <- dplyr::mutate(csr_data, year=as.double(year))
   csr_data <- dplyr::mutate(csr_data, iso3c=as.character(iso3c))
@@ -44,6 +51,9 @@ build_annual_competitiveness <- function(
 
   full_annual_data <- dplyr::full_join(
     full_annual_data, gini_data, by=c("iso3c", "year"))
+
+  full_annual_data <- dplyr::full_join(
+    full_annual_data, eurostat_sgp, by=c("iso3c", "year"))
 
   full_annual_data <- dplyr::full_join(
     full_annual_data, own_data, by=c("iso3c"="Country", "year"))
@@ -100,6 +110,7 @@ if (F){
   source(here::here("R/CSR_database.R"))
   source(here::here("R/helper_functions.R"))
   source(here::here("R/eurozone_eu_infos.R"))
+  source(here::here("R/get_eurostat_sgp_functions.R"))
 
   competitiveness_data_macro <- build_annual_competitiveness()
 

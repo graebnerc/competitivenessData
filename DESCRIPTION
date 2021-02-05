@@ -1,7 +1,7 @@
 Package: competitivenessData
 Type: Package
 Title: Containes data on competitiveness issues in the EU
-Version: 0.2.5
+Version: 0.2.6
 Authors@R: person("Claudius", "Graebner", 
   email = "claudius@claudius-graebner.com",
   role = c("aut", "cre"))
