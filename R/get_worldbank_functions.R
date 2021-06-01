@@ -106,14 +106,20 @@ get_worldbank <- function(download_data, countries_considered,
     "sl.tlf.totl.in", # Total labor force:  https://data.worldbank.org/indicator/SL.TLF.TOTL.IN
     "FP.CPI.TOTL", # https://data.worldbank.org/indicator/FP.CPI.TOTL
     "FP.CPI.TOTL.ZG", # Inflation: https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG
-    "FR.INR.RINR" # https://data.worldbank.org/indicator/FR.INR.RINR
+    "FR.INR.RINR", # https://data.worldbank.org/indicator/FR.INR.RINR
+    "NE.GDI.FTOT.ZS", # Gross fixed capital formation (% of GDP)
+    "NE.GDI.FTOT.KN", # Gross fixed capital formation (constant LCU)
+    "NE.GDI.FTOT.KD" # Gross fixed capital formation (constant 2010 US$)
   )
 
   wb_var_names_2 <- c(
     "labor_force_total", # Total labor force:  https://data.worldbank.org/indicator/SL.TLF.TOTL.IN
     "cpi_wb", # https://data.worldbank.org/indicator/FP.CPI.TOTL
     "cpi_change_wb", # Inflation: https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG
-    "interest_real" # https://data.worldbank.org/indicator/FR.INR.RINR
+    "interest_real", # https://data.worldbank.org/indicator/FR.INR.RINR
+    "cap_form_gf_perc_gdp", # Gross fixed capital formation (% of GDP)
+    "cap_form_gf_real_lcu", # Gross fixed capital formation (constant LCU)
+    "cap_form_gf_real_usd" # Gross fixed capital formation (constant 2010 US$)
   )
 
   wb_file_name <- "data-raw/wb_data.csv"
