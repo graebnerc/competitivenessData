@@ -16,6 +16,9 @@ build_annual_competitiveness <- function(
 
   desc_data <- get_euro_info()
   desc_data <- dplyr::mutate(desc_data, iso3c=as.character(iso3c))
+  desc_data <- dplyr::mutate(desc_data,
+                             iso3c=countrycode::countrycode(
+                               iso3c, "country.name", "iso3c"))
 
   own_data <- setup_own_indicators(
     countries_considered = country_sample,
