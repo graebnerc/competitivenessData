@@ -38,6 +38,13 @@ setup_swiid <- function(download_data, file_name, countries_considered,
   data.table::setnames(swiid_data, old = names(renames),
                        new = unname(renames))
   # TODO Add labels
+  # For Russia and the Soviet Union, duplicated values exist between
+  #  1988 and 1990. Mean values are used.
+  dup_data <- swiid_data[duplicated(swiid_data, by = c("iso3c", "year"))]
+  if (all(dup_data[["year"]] == 1988:1990) & unique(dup_data[["iso3c"]]) == "RUS"){
+    swiid_data <- swiid_data[, lapply(.SD, mean), by=c("iso3c", "year")]
+  }
+
   stopifnot(test_uniqueness(swiid_data, c("iso3c", "year")))
   return(swiid_data)
 }
