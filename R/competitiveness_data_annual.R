@@ -102,7 +102,7 @@ build_annual_competitiveness <- function(
         ))))]
 
   test_uniqueness(full_annual_data, index_vars = c("year", "iso3c"))
-
+  test_missings(full_annual_data, test_vars = c("year", "iso3c"))
   full_annual_data
 }
 
@@ -122,7 +122,8 @@ if (F){
   source(here::here("R/get_eurostat_sgp_functions.R"))
   source(here::here("R/get_eu_openness_shock.R"))
 
-  competitiveness_data_macro <- build_annual_competitiveness(download_data_www = T)
+  competitiveness_data_macro <- build_annual_competitiveness(
+    download_data_www = F)
 
   file_path <-  here::here("data/competitiveness_data_macro")
   data.table::fwrite(

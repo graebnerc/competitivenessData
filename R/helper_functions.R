@@ -27,6 +27,30 @@ test_uniqueness <- function(data_table, index_vars, print_pos=TRUE){
   }
 }
 
+#' Test whether columns of a data frame contain missing values
+#'
+#' @param data_ A data.frame-like object
+#' @param test_vars Character vector with column names of `data_`
+#' @family update_dataset_helpers
+#' @import dplyr
+test_missings <- function(data_, test_vars){
+  name_df <- as.list(sys.call()[[2]])
+  missing_stat <- apply(
+    dplyr::select(data_, dplyr::all_of(test_vars)),
+    MARGIN = 2, FUN = function(x) sum(is.na(x)))
+  if (sum(missing_stat)==0){
+    print(paste0("No missing values in columns ",
+                 paste(names(missing_stat), collapse = ", "),
+                 " of df '", name_df, "'!"))
+    return(TRUE)
+  } else {
+    warning(paste0("In df '", name_df, "' there are missing values in columns ",
+                   paste(names(missing_stat), collapse = ", "), " : ",
+                   paste(missing_stat, collapse = ", "), "!"))
+    return(FALSE)
+  }
+}
+
 #' Loads an object from an rda file
 #'
 #' @param file Path to the `.rda` file
