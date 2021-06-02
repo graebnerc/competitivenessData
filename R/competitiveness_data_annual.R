@@ -3,7 +3,7 @@
 #' Function used to create the data set.
 build_annual_competitiveness <- function(
   download_data_www = FALSE,
-  year_start=1994, year_end=2020){
+  year_start=1960, year_end=2020){
 
   source(here::here("R/data_settings.R"))
   pcc_data <- setup_pcc(download_data = download_data_www)
@@ -27,7 +27,7 @@ build_annual_competitiveness <- function(
   own_data <- dplyr::mutate(own_data, Country=as.character(Country))
 
   gini_data <- setup_swiid(
-    download_data = download_data_www, file_name = "swiid9_0.rda",
+    download_data = download_data_www, file_name = "swiid9_1.rda",
     countries_considered = country_sample,
     first_year = year_start, last_year = year_end)
 
@@ -45,6 +45,9 @@ build_annual_competitiveness <- function(
   csr_data <- setup_imp_scores()
   csr_data <- dplyr::mutate(csr_data, year=as.double(year))
   csr_data <- dplyr::mutate(csr_data, iso3c=as.character(iso3c))
+
+  eu_open_shocks <- setup_openness_shocks()
+  eu_open_shocks <- dplyr::mutate(eu_open_shocks, iso3c=as.character(iso3c))
 
   full_annual_data <- dplyr::full_join(
     pcc_data, mis_data, by=c("iso3c", "year"))
@@ -66,6 +69,9 @@ build_annual_competitiveness <- function(
 
   full_annual_data <- dplyr::full_join(
     full_annual_data, csr_data, by=c("iso3c", "year"))
+
+  full_annual_data <- dplyr::left_join(
+    full_annual_data, eu_open_shocks, by=c("iso3c"))
 
   full_annual_data <- dplyr::select(full_annual_data,
                                     iso3c, year, dplyr::everything())
@@ -114,8 +120,9 @@ if (F){
   source(here::here("R/helper_functions.R"))
   source(here::here("R/eurozone_eu_infos.R"))
   source(here::here("R/get_eurostat_sgp_functions.R"))
+  source(here::here("R/get_eu_openness_shock.R"))
 
-  competitiveness_data_macro <- build_annual_competitiveness()
+  competitiveness_data_macro <- build_annual_competitiveness(download_data_www = T)
 
   file_path <-  here::here("data/competitiveness_data_macro")
   data.table::fwrite(
