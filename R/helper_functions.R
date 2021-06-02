@@ -13,9 +13,11 @@
 test_uniqueness <- function(data_table, index_vars, print_pos=TRUE){
   data_table <- data.table::as.data.table(data_table)
   if (nrow(data_table)!=data.table::uniqueN(data_table, by = index_vars)){
-    warning(paste0("Rows in the data.table: ", nrow(data_table),
-                   ", rows in the unique data.table:",
-                   data.table::uniqueN(data_table, by = index_vars)))
+    warning(paste0(
+      "Rows in the data.table: ", nrow(data_table),
+      ", rows in the unique data.table:",
+      data.table::uniqueN(data_table, by = index_vars),
+      ". Run df[duplicated(df, by = c('key1'))] to see dup rows."))
     return(FALSE)
   } else {
     if (print_pos){
